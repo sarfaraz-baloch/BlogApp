@@ -137,7 +137,7 @@ const iti =    window.intlTelInput(input,  {
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: "Something went wrong!",
+        text: `${errorMessage}`,
       });
 
         sumbit_btn.disable = false;

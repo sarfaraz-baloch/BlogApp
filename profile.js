@@ -122,7 +122,13 @@ Swal.fire({
 }).then((result) => {
   /* Read more about handling dismissals below */
   if (result.dismiss === Swal.DismissReason.timer) {
-    console.log("I was closed by the timer");
+    Swal.fire({
+      position: "top-end",
+      icon: "success",
+      title: "Your work has been saved",
+      showConfirmButton: false,
+      timer: 1500
+    });
   }
 });
 
@@ -135,6 +141,8 @@ Swal.fire({
     })
   }).catch((err) => {
     console.log(err); 
+    
+
     add.disabled = false
    add.innerText = 'Add'
   })

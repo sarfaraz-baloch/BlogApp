@@ -12,16 +12,19 @@ form.addEventListener('submit', (e) => {
     const email = e.target[0].value
     const password = e.target[1].value
 
-    // console.log(email, password);
     signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
         const user = userCredential.user;
         window.location.href = 'profile.html'
         console.log('sign in')
-    })
-    .catch((error) => {
+    }).catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        console.log(errorMessage);
+        alert(errorCode);
+        Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text:  `${errorMessage}`,
+          });
     });
 })
