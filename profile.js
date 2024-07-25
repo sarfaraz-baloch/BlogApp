@@ -13,6 +13,7 @@ import {
   uploadBytes,
   getDownloadURL,
   storage,
+  serverTimestamp 
 } from "./firebase.js";
 
 const Logout_btn = document.querySelector("#Logout_btn");
@@ -71,13 +72,16 @@ form.addEventListener("submit", (e) => {
     img: e.target[0].files[0],
     tittle: e.target[1].value,
     descraption: e.target[2].value,
+    timestamp: serverTimestamp(),
+    // currentUser: auth.currentUser.name,
     // date: e.target[3].value,
     // time: e.target[4].value,
     // createdby: e.target[5].value,
     createdUid: auth.currentUser.uid,
     createdByEmail: auth.currentUser.email,
   };
-
+console.log(userInfo)
+console.log(auth.currentUser)
   add.disabled = true
   add.innerText = 'Loading...'
   const imgRef = ref(storage, userInfo.img.name);

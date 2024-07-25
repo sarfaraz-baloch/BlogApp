@@ -65,16 +65,7 @@ onAuthStateChanged(auth, (user) => {
 async function blogEvents(uid) {
   const q = query(collection(db, "blogs" ,), where("createdUid", "==", uid));
 
-  // const docRef = doc(db, "users", uid);
-  // const getdoc = getDoc(docRef)
-  //   .then((doc) => {
-  //     console.log();
-
-      
-  //   })
-  //   .catch((error) => {
-  //     console.log(error);
-  //   });
+  
 
 
   const snapshot = await getDocs(q).then((snapshot) => {
@@ -86,9 +77,14 @@ async function blogEvents(uid) {
 
       snapshot.forEach((doc) => {
         // console.log(doc.id, " => ", doc.data());
-        const date = new Date().toLocaleDateString();
-        // const time = new Date().toLocaleTimeString()
-        
+        const timestamp = doc.data().timestamp;
+        let time = ""
+        if (timestamp) {
+          const date = timestamp.toDate(); // Convert to JavaScript Date
+          time = date.toLocaleString(); // Format as desired
+        }
+        // const time = new Date().toLocaleTimeString(doc.data().timestamp);
+        // console.log(doc.data())
         const card = `
   
         <a id="blog" href="#" class="relative mt-4 flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
@@ -98,7 +94,7 @@ async function blogEvents(uid) {
     <p id="descraption_data" class="mb-10 font-normal  text-gray-700 dark:text-gray-400">${doc.data().descraption}</p>
     
     <div class="flex justify-between items-center">
-    <p class=" mb-3  font-normal text-gray-700 dark:text-gray-400">${date}</p>
+    <p class=" mb-3  font-normal text-gray-700 dark:text-gray-400">${time}</p>
     <p class=" px-4 mb-3 font-normal text-gray-700 dark:text-gray-400">${ele.data().name + " " + ele.data().lastName}</p>
     </div>
   
@@ -187,17 +183,22 @@ async function blogEvents(uid) {
   }
 
 
-  // public blog
+  ///public blog
+const querySnapshot = await getDocs(collection(db, "blogs"));
 
-
-  const querySnapshot = await getDocs(collection(db, "blogs"));
 
   querySnapshot.forEach((doc) => {
+    // console.log(doc.id, " => ", doc.data().createdByEmail.slice(0, doc.data().createdByEmail.indexOf("@")));
   
-  // const docs = collection(db, "blogs", doc.id, "users");
+  const docs = collection(db, "blogs", doc.id, "users");
+  const timestamp = doc.data().timestamp;
+  let time = ""
+  if (timestamp) {
+    const date = timestamp.toDate(); // Convert to JavaScript Date
+    time = date.toLocaleString(); // Format as desired
+  }
 
-  
-
+  const UserName = doc.data().createdByEmail.slice(0, doc.data().createdByEmail.indexOf("@"))
     const card = `
 
           <a id="blog" href="#" class="relative mt-4 flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
@@ -205,65 +206,17 @@ async function blogEvents(uid) {
   <div class="flex flex-col justify-between p-4 leading-normal">
       <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">${doc.data().tittle}</h5>
       <p class="mb-10 font-normal text-gray-700 dark:text-gray-400">${doc.data().descraption}</p>
-       <p class="absolute bottom-0 mb-3  font-normal text-gray-700 dark:text-gray-400">${doc.data().date} / ${doc.data().time}</p>
-      <p class="absolute bottom-0 right-0 px-4 mb-3 font-normal text-gray-700 dark:text-gray-400">${doc.data().createdby}</p>
+       <p class="absolute bottom-0 mb-3  font-normal text-gray-700 dark:text-gray-400">${time}</p>
+      <p class="absolute bottom-0 right-0 px-4 mb-3 font-normal text-gray-700 dark:text-gray-400">${UserName}</p>
   </div>
 </a>
           `;
 
     container_public.innerHTML += card;
   });
+
+
+
 }
 
 
-//  const docRef = doc(db, "users", uid);
-//     const getdoc = getDoc(docRef)
-//     .then((ele) => {
-//       // console.log(ele.data().lastName);
-
-//       snapshot.forEach((doc) => {
-//         // console.log(doc.id, " => ", doc.data());
-//         const date = new Date().toLocaleDateString();
-//         // const time = new Date().toLocaleTimeString()
-        
-//         const card = `
-  
-//         <a id="blog" href="#" class="relative mt-4 flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
-//   <img class="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-s-lg" src="${doc.data().img}" alt="">
-//   <div class="flex flex-col justify-between p-4 leading-normal">
-//     <h5  id="tittle_data" class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">${doc.data().tittle}</h5>
-//     <p id="descraption_data" class="mb-10 font-normal  text-gray-700 dark:text-gray-400">${doc.data().descraption}</p>
-    
-//     <div class="flex justify-between items-center">
-//     <p class=" mb-3  font-normal text-gray-700 dark:text-gray-400">${date}</p>
-//     <p class=" px-4 mb-3 font-normal text-gray-700 dark:text-gray-400">${ele.data().name + " " + ele.data().lastName}</p>
-//     </div>
-  
-//     <div class="flex justify-between items-center">
-//     <button
-//             id="sumbit_btn"
-//             type="submit"
-//             onclick="updateBlog('${doc.id}')"
-//             class="text-white mt-2  bg-green-300 hover:bg-green-300 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-//           >
-//             Edit
-//           </button>
-  
-//           <button
-//             id="sumbit_btn"
-//             type="submit"
-//             onclick="deleteBlog('${doc.id}')"
-//             class="text-white mt-2  bg-red-500 hover:bg-green-300 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-//           >
-//             Delete
-//           </button>
-//     </div>
-//   </div>
-  
-//   </a>
-  
-//         `;
-  
-//   container.innerHTML += card;
-//       });
-//     })

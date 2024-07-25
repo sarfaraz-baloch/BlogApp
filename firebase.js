@@ -26,6 +26,7 @@ import {
   updateDoc,
   where,
   deleteDoc,
+  serverTimestamp 
 } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-firestore.js";
 
 //Stroage
@@ -75,6 +76,7 @@ export {
   where,
   updateDoc,
   deleteDoc,
+  serverTimestamp 
    
 };
 // function getusers() {
