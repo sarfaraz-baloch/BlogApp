@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SignIn</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="w-full h-[100vh] flex items-center justify-center px-6 bg-indigo-700" >
+
+    <div class="flex items-center justify-center flex-col gap-4 w-2/3">
+      <span class="text-white border-b-2 text-5xl font-semibold whitespace-nowrap dark:text-white">Mehrawan Art</span>
+    <p class="text-white text-xl font-semibold whitespace-nowrap dark:text-white"> Create your blog And explore world!</p>
+    </div>
+    <form
+    class="max-w-md w-full  border-2 mx-auto mt-10 p-5 rounded-lg bg-white shadow-lg"
+      id="form_signin"
+    >
+      <h4 class="text-2xl font-bold mt-10 mb-10 border-b-2 border-black py-5">
+        SignIn
+      </h4>
+      <div class="relative z-0 w-full mb-5 group">
+        <input
+          type="email"
+          name="floating_email"
+          id="floating_email"
+          class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+          required
+        />
+        <label
+          for="floating_email"
+          class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+          >Email address</label
+        >
+      </div>
+      <div class="relative z-0 w-full mb-5 group">
+        <input
+          type="password"
+          name="floating_password"
+          id="floating_password"
+          class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+          placeholder=" "
+          required
+        />
+        <label
+          for="floating_password"
+          class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+          >Password</label
+        >
+      </div>
+      <div class="relative z-0 w-full mb-5 group">
+        <button
+          class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg"
+        >
+          Sign in
+        </button>
+        <p class="text-sm mt-10 flex gap-4 items-center justify-center">
+          Don't have an account?
+          <a
+            href="./index.html"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-sm border-b-2 border-blue-500 py-2 text-blue-500"
+          >
+            Sign Up
+          </a>
+        </p>
+      </div>
+    </form>
+
+    <script src="./signin.js" type="module"></script>
+  </body>
+</html>
